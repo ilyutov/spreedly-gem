@@ -40,14 +40,18 @@ module Spreedly
     def parse_gateway_specific_response_fields(xml_doc)
       result = {}
 
-      xml_doc.at_xpath('.//gateway_specific_response_fields').xpath('*').each do |node|
-        node_name = node.name.to_sym
-        if (node.elements.empty?)
-          result[node_name] = node.text
-        else
-          node.elements.each do |childnode|
-            result[node_name] ||= {}
-            result[node_name][childnode.name.to_sym] = childnode.text
+      gsrf_xml = xml_doc.at_xpath('.//gateway_specific_response_fields')
+
+      if gsrf_xml.present?
+        gsrf_xml.xpath('*').each do |node|
+          node_name = node.name.to_sym
+          if (node.elements.empty?)
+            result[node_name] = node.text
+          else
+            node.elements.each do |childnode|
+              result[node_name] ||= {}
+              result[node_name][childnode.name.to_sym] = childnode.text
+            end
           end
         end
       end
