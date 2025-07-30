@@ -1,7 +1,5 @@
 module Spreedly
-
   module SslRequester
-
     def ssl_get(endpoint, headers)
       ssl_request(:get, endpoint, nil, headers)
     end
@@ -18,11 +16,8 @@ module Spreedly
       ssl_request(:put, endpoint, body, headers)
     end
 
-    def ssl_options(endpoint)
-      ssl_request(:options, endpoint, nil, {})
-    end
-
     private
+
     def ssl_request(method, endpoint, body, headers, options = {})
       opts = { talking_to_gateway: false, return_raw: false }.merge(options)
       how_long = opts[:talking_to_gateway] ? 66 : 10
@@ -73,7 +68,5 @@ module Spreedly
       puts raw_response.inspect
       puts "\nraw_response.code: #{raw_response.code}\nraw_response.body:\n#{raw_response.body}"
     end
-
   end
-
 end
