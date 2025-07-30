@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'mocha/setup'
+require 'mocha/test_unit'
 require 'awesome_print'
 require 'pry'
 require 'logger'
@@ -20,4 +20,3 @@ Test::Unit::TestCase.class_eval do
   include Spreedly::Assertions
   include Spreedly::CommunicationHelper
 end
-
